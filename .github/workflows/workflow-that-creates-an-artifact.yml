@@ -1,11 +1,12 @@
 name : workflow for creating an artifact
+on: [push]
+
 # declare vaiable and use as artifact name
 env: 
   ARTIFACT_FILE_NAME: 'README.md'
-on: [push]
 
 jobs:
-  build:
+  main:
     runs-on: Ubuntu-Latest
     steps:
     - name: checkout the code
@@ -16,5 +17,5 @@ jobs:
     - name: upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: theReadmeFile
+        name: ${{env.ARTIFACT_FILE_NAME}}
         path: ${{env.ARTIFACT_FILE_NAME}}
