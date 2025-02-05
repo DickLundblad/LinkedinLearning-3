@@ -1,0 +1,20 @@
+name : workflow for creating an artifact
+# declare vaiable and use as artifact name
+env: 
+  ARTIFACT_FILE_NAME: 'README.md'
+on: [push]
+
+jobs:
+  build:
+    runs-on: Ubuntu-Latest
+    steps:
+    - name: checkout the code
+      uses: actions/checkout@v4
+    - name: List files in the repository
+      run: |
+          ls ${{ github.workspace }} 
+    - name: upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux
+        path: ${{env.ARTIFACT_FILE_NAME}}
